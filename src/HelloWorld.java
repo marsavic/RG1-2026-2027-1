@@ -7,6 +7,7 @@ import xyz.marsavic.drawingfx.drawing.Drawing;
 import xyz.marsavic.drawingfx.drawing.DrawingUtils;
 import xyz.marsavic.drawingfx.drawing.View;
 import xyz.marsavic.drawingfx.gadgets.annotations.GadgetAnimation;
+import xyz.marsavic.drawingfx.gadgets.annotations.GadgetColorPicker;
 import xyz.marsavic.geometry.Transformation;
 import xyz.marsavic.geometry.Vector;
 import xyz.marsavic.utils.Numeric;
@@ -19,6 +20,8 @@ public class HelloWorld implements Drawing {
 	
 	Font font = new Font(100);
 	
+	@GadgetColorPicker
+	Color color=Color.color(0.3, 0.5, 0.8);
 	
 	@Override
 	public void draw(View view) {
@@ -27,7 +30,7 @@ public class HelloWorld implements Drawing {
 				.translate(new Vector(200 * Numeric.sinT(time * 0.21), 0))
 				.rotate(0.17 * time + Numeric.sinT(time * 0.13))
 		);
-		DrawingUtils.clear(view, Color.BLACK);
+		DrawingUtils.clear(view, color);
 		view.setFont(font);
 		view.setTextAlign(TextAlignment.CENTER);
 		view.setFill(Color.hsb(time * 23, 0.8, 1));
