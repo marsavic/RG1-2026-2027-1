@@ -17,7 +17,7 @@ public class Desaturate extends ColorFilter {
 
 	@Override
 	public Color processColor(Color input) {
-		return Color.hsb(0,0,0,0);
+		return Color.hsb(input.getHue(), input.getSaturation() * saturationFactor, input.getBrightness(), input.getOpacity());
 	}
 	
 }	

@@ -14,7 +14,7 @@ public class Invert extends ColorFilter {
 		double g = input.getGreen();
 		double b = input.getBlue();
 
-		return Color.BLACK;
+		return new Color(1 - r, 1 - g, 1 - b, input.getOpacity());
 	}
 
 }

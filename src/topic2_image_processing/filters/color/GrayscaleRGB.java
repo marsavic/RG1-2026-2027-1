@@ -15,9 +15,8 @@ public class GrayscaleRGB extends ColorFilter {
 		double g = input.getGreen();
 		double b = input.getBlue();
 		
-		
-		
-		return Color.BLACK;
+		double s = (r + g + b) / 3;
+		return new Color(s, s, s, input.getOpacity());
 	}
 	
 }	

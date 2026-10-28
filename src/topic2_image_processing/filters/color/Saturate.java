@@ -19,7 +19,7 @@ public class Saturate extends ColorFilter {
 	public Color processColor(Color input) {
 		double s = input.getSaturation();
 		
-		return Color.hsb(0,0,0,0);
+		return Color.hsb(input.getHue(), s + (1 - s) * k, input.getBrightness(), input.getOpacity());
 	}
 	
 }	

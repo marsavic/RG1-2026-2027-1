@@ -13,7 +13,7 @@ public class GrayscaleHSB extends ColorFilter {
 	public Color processColor(Color input) {
 		double bri = input.getBrightness();
 		
-		return Color.BLACK;
+		return Color.hsb(0, 0, bri);
 	}
 	
 }	

@@ -19,7 +19,16 @@ public class Accent extends ColorFilter {
 
 	@Override
 	public Color processColor(Color input) {
-		return input;
+		double dHue = Math.abs(input.getHue() - accentHue);
+		if (dHue > 180) {
+			dHue = 360 - dHue;
+		}
+		if (dHue < delta) {
+			return input;
+		}
+		else {
+			return Color.hsb(input.getHue(), 0, input.getBrightness());
+		}
 	}
 	
 }
