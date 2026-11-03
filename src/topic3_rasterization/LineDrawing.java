@@ -28,11 +28,7 @@ public class LineDrawing implements Drawing {
 	@GadgetBoolean
 	boolean showLine = false;
 	
-<<<<<<< HEAD
-
-=======
 	
->>>>>>> branch 'master' of https://github.com/marsavic/RG1-2026-2027-1.git
 	
 	void drawLineBresenham(PixelWriter pw, int ax, int ay, int bx, int by) {
 		// Brezenhamov algoritam smatra da centri piksela imaju celobrojne koordinate. U drugim kodovima ćemo češće
