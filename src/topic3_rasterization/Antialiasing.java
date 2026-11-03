@@ -33,7 +33,7 @@ public class Antialiasing implements Drawing {
 	
 	CameraSimple camera = new CameraSimple();
 	
-	
+
 	
 	/**
 	 * Crta antialiasovanu sliku implicitno zadatog oblika.
