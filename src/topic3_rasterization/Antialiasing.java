@@ -16,7 +16,9 @@ import xyz.marsavic.input.InputEvent;
 import xyz.marsavic.input.InputState;
 import xyz.marsavic.utils.Numeric;
 
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 
 public class Antialiasing implements Drawing {
@@ -26,9 +28,9 @@ public class Antialiasing implements Drawing {
 	
 	@GadgetInteger(min = 1)
 	int subdivision = 3; // Svaki piksel će biti podeljen na subdivision*subdivision subpixela.
-	// Što je subdivision veći, to je antialias bolji, ali sporiji.
+	// Što je subdivision veći, to je antialiasing bolji, ali sporiji.
 	
-	@GadgetInteger(min = 0, max = 16)
+	@GadgetInteger(min = 0, max = 21)
 	int imageIndex = 0;
 	
 	CameraSimple camera = new CameraSimple();
@@ -408,61 +410,41 @@ public class Antialiasing implements Drawing {
 		return image;
 	}
 	
+	List<Supplier<Image>> images = List.of(
+			() -> antialiasedShape(line45(2)                   , 200, 200, subdivision),
+			() -> antialiasedShape(halfPlane(0.173)            , 200, 200, subdivision),
+			() -> antialiasedShape(rectangle(200, 100)         , 250, 250, subdivision),
+			() -> antialiasedShape(rotatedSquare45(140)        , 200, 200, subdivision),
+			() -> antialiasedShape(triangle(200, 100)          , 400, 400, subdivision),
+			() -> antialiasedShape(circle(100,3)               , 250, 250, subdivision),
+			() -> antialiasedShape(sineGraph()                 , 300, 300, subdivision),
+			() -> antialiasedShape(ellipse(100.0, 50.0)        , 300, 200, subdivision),
+			() -> antialiasedShape(chessboard(20)              , 278, 278, subdivision),
+			() -> antialiasedShape(concentricCircles(10)       , 278, 278, subdivision),
+			() -> antialiasedShape(heart(80.0)                 , 278, 278, subdivision),
+			() -> antialiasedShape(flower()                    , 278, 278, subdivision),
+			() -> antialiasedShape(perspectiveCheckerboard(283), 283, 283, subdivision),
+			() -> antialiasedShape(kinderBueno()               , 200, 200, subdivision),
+			
+	        () -> antialiasedShape(twoCirclesUnion()           , 300, 300, subdivision),
+            () -> antialiasedShape(lens()                      , 300, 300, subdivision),
+            () -> antialiasedShape(crescent()                  , 300, 300, subdivision),
+            () -> antialiasedShape(ring(100, 80)               , 300, 300, subdivision),
+            () -> antialiasedShape(twoCirclesXor()             , 300, 300, subdivision),
+            () -> antialiasedShape(outsideDisk()               , 300, 300, subdivision),
+            () -> antialiasedShape(yinYang(100)                , 300, 300, subdivision),
+			
+			() -> xiaolinWuLine(10, 20, 190, 120, 200, 200)			
+	);
+		
+
+	
 	@Override
 	public void draw(View view) {
 		view.setImageSmoothing(false);
 		view.addTransformation(camera.getTransformation());
 		DrawingUtils.clear(view, Color.gray(0.125));
-		
-		//Za pokretanje odkomentarišete liniju koda koja poziva odgovarajuću funkciju
-		
-		Image image = antialiasedShape(line45(2), 200, 200, subdivision);
-
-//      Image image = antialiasedShape(halfPlane(0.173), 200, 200, subdivision);
-
-//      Image image = antialiasedShape(rectangle(200, 100), 250, 250, subdivision);
-
-//      Image image = antialiasedShape(rotatedSquare45(140), 200, 200, subdivision);
-
-//      Image image = antialiasedShape(triangle(200, 100), 400, 400, subdivision);
-
-//		Image image = antialiasedShape(circle(100,3), 250, 250, subdivision);
-
-//		Image image = antialiasedShape(sineGraph(), 300, 300, subdivision);
-
-//      Image image = antialiasedShape(wavyStripe(), 300, 200, subdivision);
-
-//      Image image = antialiasedShape(ellipse(100.0, 50.0), 300, 200, subdivision);
-
-//      Image image = antialiasedShape(chessboard(20), 278, 278, subdivision);
-
-//      Image image = antialiasedShape(concentricCircles(10), 278, 278, subdivision);
-
-//      Image image = antialiasedShape(heart(80.0), 278, 278, subdivision);
-
-//      Image image = antialiasedShape(flower(), 278, 278, subdivision);
-
-//      Image image = antialiasedShape(perspectiveCheckerboard(283), 283, 283, subdivision);
-
-//		Image image = antialiasedShape(kinderBueno(), 200, 200, subdivision);
-		
-//      Image image = antialiasedShape(twoCirclesUnion(), 300, 300, subdivision);
-
-//      Image image = antialiasedShape(lens(), 300, 300, subdivision);
-
-//      Image image = antialiasedShape(crescent(), 300, 300, subdivision);
-
-//      Image image = antialiasedShape(ring(100, 80), 300, 300, subdivision);
-
-//      Image image = antialiasedShape(twoCirclesXor(), 300, 300, subdivision);
-
-//      Image image = antialiasedShape(outsideDisk(), 300, 300, subdivision);
-
-//      Image image = antialiasedShape(yinYang(100), 300, 300, subdivision);
-
-//      Image image = xiaolinWuLine(10, 20, 190, 120, 200, 200);		
-		
-		view.drawImageCenteredNativeOrientation(Vector.ZERO, image);
+		view.drawImageCenteredNativeOrientation(Vector.ZERO, images.get(imageIndex).get());
 	}
 	
 	
