@@ -14,16 +14,18 @@ import xyz.marsavic.geometry.Vector;
 import xyz.marsavic.input.InputEvent;
 import xyz.marsavic.input.InputState;
 
+import static xyz.marsavic.geometry.Vector.*;
+
 
 public class LineDrawing implements Drawing {
 	
 	CameraSimple camera = new CameraSimple();
 	
 	@GadgetVector
-	Vector p0 = new Vector(10, 29);
+	Vector p0 = xy(10, 29);
 	
 	@GadgetVector
-	Vector p1 = new Vector(120, 76);
+	Vector p1 = xy(120, 76);
 
 	@GadgetBoolean
 	boolean showLine = false;
@@ -65,7 +67,7 @@ public class LineDrawing implements Drawing {
 	}
 	
 	
-	Vector offset = new Vector(0.5, 0.5);
+	Vector offset = xy(0.5, 0.5);
 	
 	@Override
 	public void draw(View view) {
@@ -87,7 +89,7 @@ public class LineDrawing implements Drawing {
 		int y1 = (int) (size/2 - 1 - p1.y());
 		
 		drawLineBresenham(pw, x0, y0, x1, y1);
-		view.drawImageCenteredNativeOrientation(Vector.ZERO, image);
+		view.drawImageCenteredNativeOrientation(ZERO, image);
 
 		if (showLine) {
 			view.setStroke(Color.RED);

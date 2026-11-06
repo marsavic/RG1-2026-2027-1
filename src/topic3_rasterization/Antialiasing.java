@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import static xyz.marsavic.geometry.Vector.*;
+
 
 public class Antialiasing implements Drawing {
 	
@@ -62,7 +64,7 @@ public class Antialiasing implements Drawing {
 						// Subpiksel (sx, sy) piksela (x, y).
 						
 						// Vektor p je položaj centra subpiksela.
-						Vector p = new Vector(
+						Vector p = xy(
 								x - sizeX / 2.0 + (sx + 0.5) / subdivision,
 								sizeY / 2.0 - y + (sy + 0.5) / subdivision
 						);
@@ -247,7 +249,7 @@ public class Antialiasing implements Drawing {
 	// Translacija oblika za vektor (dx, dy).
 	// Tačka p pripada pomerenom obliku ako (p - d) pripada originalnom obliku.
 	Predicate<Vector> translate(Predicate<Vector> shape, double dx, double dy) {
-		return p -> shape.test(new Vector(p.x() - dx, p.y() - dy));
+		return p -> shape.test(xy(p.x() - dx, p.y() - dy));
 	}
 	
 	
@@ -444,7 +446,7 @@ public class Antialiasing implements Drawing {
 		view.setImageSmoothing(false);
 		view.addTransformation(camera.getTransformation());
 		DrawingUtils.clear(view, Color.gray(0.125));
-		view.drawImageCenteredNativeOrientation(Vector.ZERO, images.get(imageIndex).get());
+		view.drawImageCenteredNativeOrientation(ZERO, images.get(imageIndex).get());
 	}
 	
 	

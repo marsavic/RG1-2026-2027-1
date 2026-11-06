@@ -13,6 +13,8 @@ import xyz.marsavic.drawingfx.gadgets.annotations.GadgetDouble;
 import xyz.marsavic.geometry.Box;
 import xyz.marsavic.geometry.Vector;
 
+import static xyz.marsavic.geometry.Vector.*;
+
 
 /**
  * Alfa kanal je četvrta komponenta boje, koja određuje njenu neprovidnost
@@ -47,7 +49,7 @@ public class ColorsAlpha implements Drawing {
 		for (int j = j0; j < j1; j++) {
 			for (int i = i0; i < i1; i++) {
 				if (Math.floorMod(i + j, 2) == 0) {
-					view.fillBox(new Vector(i * d, j * d), new Vector(d, d));
+					view.fillBox(xy(i * d, j * d), xy(d, d));
 				}
 			}
 		}
@@ -69,13 +71,13 @@ public class ColorsAlpha implements Drawing {
 
 		for (int i = 0; i <= 4; i++) {
 			double a = i / 4.0;
-			Vector c = new Vector(-200 + 100 * i, 220);
+			Vector c = xy(-200 + 100 * i, 220);
 
 			view.setFill(new Color(1, 0, 0, a));           // Četvrti parametar je alfa.
-			view.fillBoxCentered(c, new Vector(30, 30));
+			view.fillBoxCentered(c, xy(30, 30));
 
 			view.setFill(checkerboard ? Color.BLACK : Color.WHITE);
-			view.fillTextNativeOrientation("α = " + a, c.add(new Vector(0, -60)));
+			view.fillTextNativeOrientation("α = " + a, c.add(xy(0, -60)));
 		}
 
 		// Tri kruga sa neprovidnošću alpha. Krug koji je nacrtan kasnije je "iznad" ranije nacrtanih.
@@ -85,7 +87,7 @@ public class ColorsAlpha implements Drawing {
 		for (int i = 0; i < 3; i++) {
 			Color c = colors[i];
 			view.setFill(new Color(c.getRed(), c.getGreen(), c.getBlue(), alpha));
-			view.fillCircleCentered(Vector.polar(73, 0.25 + i / 3.0).add(new Vector(0, -90)), 120);
+			view.fillCircleCentered(polar(73, 0.25 + i / 3.0).add(xy(0, -90)), 120);
 		}
 	}
 

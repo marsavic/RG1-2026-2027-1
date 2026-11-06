@@ -9,7 +9,6 @@ import xyz.marsavic.drawingfx.drawing.DrawingUtils;
 import xyz.marsavic.drawingfx.drawing.View;
 import xyz.marsavic.drawingfx.gadgets.annotations.GadgetBoolean;
 import xyz.marsavic.drawingfx.gadgets.annotations.GadgetInteger;
-import xyz.marsavic.geometry.Vector;
 import topic2_image_processing.filters.CombinedFilter;
 import topic2_image_processing.filters.ConvolutionFilter;
 import topic2_image_processing.filters.Filter;
@@ -22,6 +21,8 @@ import topic2_image_processing.filters.displacement.Wave;
 import topic2_image_processing.filters.displacement.Zoom;
 import topic2_image_processing.filters.misc.Sobel;
 import topic2_image_processing.filters.misc.Vignette;
+
+import static xyz.marsavic.geometry.Vector.*;
 
 
 public class DemoFilters implements Drawing {
@@ -93,7 +94,7 @@ public class DemoFilters implements Drawing {
 		Filter filter = filters[filterIndex];
 		Image originalImage = new Image("images/" + fileNames[imageIndex]);
 		Image filteredImage = filter.process(originalImage);
-		view.drawImageCenteredNativeOrientation(Vector.ZERO, applyFilter ? filteredImage : originalImage);
+		view.drawImageCenteredNativeOrientation(ZERO, applyFilter ? filteredImage : originalImage);
 		
 		DrawingUtils.drawInfoText(view, "Image: " + fileNames[imageIndex] + "   Filter: " + filter.getClass().getSimpleName());
 	}
@@ -101,7 +102,7 @@ public class DemoFilters implements Drawing {
 	
 	public static void main(String[] args) {
 		Options options = Options.redrawOnEvents();
-		options.drawingSize = new Vector(820, 820);
+		options.drawingSize = xy(820, 820);
 		DrawingApplication.launch(options);
 	}
 }

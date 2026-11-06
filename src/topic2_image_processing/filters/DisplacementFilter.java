@@ -7,6 +7,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import xyz.marsavic.geometry.Vector;
 
+import static xyz.marsavic.geometry.Vector.*;
+
 /**
  * Displacement filter je filter koji "premešta" piksele. Definisan je funkcijom koja nam za svaki položaj na rezultujućoj
  * slici vraća odakle treba uzeti piksel sa originalne slike.
@@ -25,7 +27,7 @@ public abstract class DisplacementFilter extends Filter {
 	public Image process(Image input) {
 		final int w = (int) input.getWidth();
 		final int h = (int) input.getHeight();
-		Vector dim = new Vector(w, h);
+		Vector dim = xy(w, h);
 		
 		WritableImage output = new WritableImage(w, h);
 
@@ -35,7 +37,7 @@ public abstract class DisplacementFilter extends Filter {
 		for (int y = 0; y < h; y++) {
 			for (int x = 0; x < w; x++) {
 				// Pomoću funkcije source nalazimo koordinate odakle treba kopirati.
-				Vector dst = new Vector(x, y);
+				Vector dst = xy(x, y);
 				Vector src = source(dst, dim);
 				
 				// Zaokružujemo te koordinate na najbliži ceo broj.

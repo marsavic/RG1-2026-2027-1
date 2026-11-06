@@ -11,7 +11,7 @@ public class FlipHorizontal extends DisplacementFilter {
 	@Override
 	public Vector source(Vector dst, Vector dim) {
 		// Vraćamo poziciju koja je osno simetrična u odnosu na srednju vertikalu.
-		return new Vector(dim.x() - 1 - dst.x(), dst.y());
+		return Vector.xy(dim.x() - 1 - dst.x(), dst.y());
 	}
 	
 }

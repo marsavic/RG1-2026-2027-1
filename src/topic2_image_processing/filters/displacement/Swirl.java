@@ -3,6 +3,8 @@ package topic2_image_processing.filters.displacement;
 import xyz.marsavic.geometry.Vector;
 import topic2_image_processing.filters.DisplacementFilter;
 
+import static xyz.marsavic.geometry.Vector.*;
+
 
 public class Swirl extends DisplacementFilter {
 	final double f, a;
@@ -16,11 +18,11 @@ public class Swirl extends DisplacementFilter {
 
 	@Override
 	public Vector source(Vector dst, Vector dim) {
-		Vector s = dst.div(dim).mul(2).sub(new Vector(1, 1)); // Pretvaramo poziciju u normalizovane koordinate. Vektor s se nalazi u [-1,1]x[-1,1]. 
+		Vector s = dst.div(dim).mul(2).sub(xy(1, 1));         // Pretvaramo poziciju u normalizovane koordinate. Vektor s se nalazi u [-1,1]x[-1,1]. 
 		double r = s.length();                                  // Udaljenost od centra, vrednost iz [0,1].
 		double phi = s.angle() + a * Math.cos(f*r*Math.PI*2); // s.angle() je ugao koji vektor s zaklapa sa x-osom. Na to dodajemo pomeraj prema navedenoj funkciji.
-		Vector p = Vector.polar(r, phi);                      // Traženu poziciju dobijamo sa izračunatim novim uglom, a istom udaljenosti od centra.	
-		return p.add(new Vector(1, 1)).div(2).mul(dim);       // Vraćamo se u koordinatni sistem slike.
+		Vector p = polar(r, phi);                             // Traženu poziciju dobijamo sa izračunatim novim uglom, a istom udaljenosti od centra.	
+		return p.add(xy(1, 1)).div(2).mul(dim);               // Vraćamo se u koordinatni sistem slike.
 	}
 	
 }

@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 import xyz.marsavic.geometry.Vector;
 import topic2_image_processing.filters.Filter;
 
+import static xyz.marsavic.geometry.Vector.*;
+
 public class Sobel extends Filter {
 	
 	private static final double[][] kernelX = {
@@ -76,7 +78,7 @@ public class Sobel extends Filter {
 					}
 				}
 				
-				g[y][x] = (new Vector(gy, gx)).div(sqrt2); // Delimo sa koren iz 2 da bi intenzitet bio u [0, 1].
+				g[y][x] = xy(gy, gx).div(sqrt2); // Delimo sa koren iz 2 da bi intenzitet bio u [0, 1].
 			}
 		}
 		
@@ -123,7 +125,7 @@ public class Sobel extends Filter {
 		int h = gradient.length;
 		int w = gradient[0].length;
 		
-		Vector p = Vector.polar(1, angle);
+		Vector p = polar(1, angle);
 		
 		WritableImage output = new WritableImage(w, h);
 		PixelWriter pw = output.getPixelWriter();

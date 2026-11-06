@@ -9,8 +9,9 @@ import xyz.marsavic.drawingfx.drawing.View;
 import xyz.marsavic.drawingfx.gadgets.annotations.GadgetAnimation;
 import xyz.marsavic.drawingfx.gadgets.annotations.GadgetColorPicker;
 import xyz.marsavic.geometry.Transformation;
-import xyz.marsavic.geometry.Vector;
 import xyz.marsavic.utils.Numeric;
+
+import static xyz.marsavic.geometry.Vector.*;
 
 
 public class HelloWorld implements Drawing {
@@ -27,14 +28,14 @@ public class HelloWorld implements Drawing {
 	public void draw(View view) {
 		view.addTransformation(Transformation.identity()
 				.scale(0.1 * (Numeric.sinT(0.17 * time) + 3))
-				.translate(new Vector(200 * Numeric.sinT(time * 0.21), 0))
+				.translate(xy(200 * Numeric.sinT(time * 0.21), 0))
 				.rotate(0.17 * time + Numeric.sinT(time * 0.13))
 		);
 		DrawingUtils.clear(view, color);
 		view.setFont(font);
 		view.setTextAlign(TextAlignment.CENTER);
 		view.setFill(Color.hsb(time * 23, 0.8, 1));
-		view.fillTextNativeOrientation("Grafikaaaaaa!", Vector.ZERO);
+		view.fillTextNativeOrientation("Grafikaaaaaa!", ZERO);
 	}
 	
 	

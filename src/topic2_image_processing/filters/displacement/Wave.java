@@ -22,7 +22,7 @@ public class Wave extends DisplacementFilter {
 	public Vector source(Vector dst, Vector dim) {
 		// Na y koordinatu dst pozicije dodajemo pomeraj po x osi koji nam zavisi od x koordinate, x koordinata ostaje nepromenjena.
 		// Pomeraj po y je sinusna funkcija, samo joj parametar moramo skalirati da perioda bude wavelength umesto 2*pi.
-		return new Vector (dst.x(), dst.y() + amplitude * Math.sin(dst.x() / wavelength * 2 * Math.PI));
+		return Vector.xy(dst.x(), dst.y() + amplitude * Math.sin(dst.x() / wavelength * 2 * Math.PI));
 	}
 	
 }
