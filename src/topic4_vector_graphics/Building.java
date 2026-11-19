@@ -29,20 +29,21 @@ public class Building implements Drawing {
 		DrawingUtils.clear(view, Color.gray(0.2));
 
 		// Žuti zid
-		
-		
+		Vector r = w.mul(xy(m, n)).add(g.mul(xy(m + 1, n + 1))).div(2); 
+		view.setFill(Color.hsb(50, 0.6, 0.9));
+		view.fillBoxCentered(ZERO, r);
 		
 		// Prozori
-		
-		
+		view.setFill(Color.CORNFLOWERBLUE);
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
+				view.fillBox((w.add(g).mul(xy(j,i))).add(g).sub(r), w);
 			}
 		}
 		
 		// Krov
-		
-		
+		view.setFill(Color.hsb(10, 0.6, 0.9));
+		view.fillPolygon(r, r.mul(xy(-1,1)), r.mul(xy(0,1)).add(xy(0,40)));
 	}
 	
 	

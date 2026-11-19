@@ -31,12 +31,19 @@ public class Cards implements Drawing {
 	
 	void drawCard(View view) {
 		// Okvir karte sa senkom
-		
+		view.setFill(Color.WHITE);
+		view.setEffect(new DropShadow(32, Color.BLACK));
+		view.fillRoundBoxCentered(ZERO, size.div(2), a);
+		view.setEffect(null);
 		         // Efekt se odnosi na svaki naredni iscrtani objekat sve dok ne postavimo efekt na null.
-		
 
 		// Simbol na karti
+		view.setLineCap(StrokeLineCap.BUTT);
+		view.setStroke(Color.hsb(0, 1, 1));
+		view.setLineWidth(16);
 		
+		view.strokeLineSegment(polar(r, 1.0 / 8), polar(r, 5.0 / 8));
+		view.strokeCircleCentered(ZERO, r);
 		
 	}
 	
@@ -49,8 +56,13 @@ public class Cards implements Drawing {
 		SplittableRandom rng = new SplittableRandom(6380977105788498275l);
 
 		for (int i = nCards - 1; i >= 0; i--) {
-			
+			view.stateStore();
+			Transformation t = new Transformation()
+					.rotate(0.01 * rng.nextGaussian())
+					.translate(d.mul(i));
+			view.addTransformation(t);
 			drawCard(view);
+			view.stateRestore();
 			
 		}
 	}
